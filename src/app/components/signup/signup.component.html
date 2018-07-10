@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-md-4">
+    <h1>Sign up</h1>
+    <hr>
+    <br>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
+      <fieldset>
+        <div class="form-group">
+          <label for="fname">First name</label>
+          <input name="fname" formControlName="fname" type="text" required
+                 class="form-control" id="fname" placeholder="enter your first name"
+                 [ngClass]="{'is-invalid': userForm.controls.fname.invalid && (userForm.controls.fname.dirty || userForm.controls.fname.touched),
+                      'is-valid': userForm.controls.fname.valid && (userForm.controls.fname.dirty || userForm.controls.fname.touched)
+                      }">
+
+          <div class="invalid-feedback"
+               *ngIf="userForm.controls.fname.errors && (userForm.controls.fname.dirty || userForm.controls.fname.touched)">
+            <p *ngIf="userForm.controls.fname.errors.required">First name is required</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lname">Last name</label>
+          <input name="lname" formControlName="lname" type="text" required
+                 class="form-control" id="lname" placeholder="enter your last name"
+                 [ngClass]="{'is-invalid': userForm.controls.lname.invalid && (userForm.controls.lname.dirty || userForm.controls.lname.touched),
+                  'is-valid': userForm.controls.lname.valid && (userForm.controls.lname.dirty || userForm.controls.lname.touched)
+                  }">
+
+          <div class="invalid-feedback"
+               *ngIf="userForm.controls.lname.errors && (userForm.controls.lname.dirty || userForm.controls.lname.touched)">
+            <p *ngIf="userForm.controls.lname.errors.required">Last name is required</p>
+          </div>
+        </div>
+      </fieldset>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input name="email" formControlName="email" type="email" required
+               class="form-control" id="email" placeholder="enter your email"
+               [ngClass]="{'is-invalid': userForm.controls.email.invalid && (userForm.controls.email.dirty || userForm.controls.email.touched),
+            'is-valid': userForm.controls.email.valid && (userForm.controls.email.dirty || userForm.controls.email.touched)
+            }">
+
+        <div class="invalid-feedback"
+             *ngIf="userForm.controls.email.errors && (userForm.controls.email.dirty || userForm.controls.email.touched)">
+          <p *ngIf="userForm.controls.email.errors.required">Email is required</p>
+          <p *ngIf="userForm.controls.email.errors.pattern">Email is not valid</p>
+        </div> <!-- or  can use alert-danger or text-danger style class -->
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input name="password" formControlName="password" type="password" required
+               class="form-control" id="password" placeholder="enter a password"
+               [ngClass]="{'is-invalid': userForm.controls.password.invalid && (userForm.controls.password.dirty || userForm.controls.password.touched),
+          'is-valid': userForm.controls.password.valid && (userForm.controls.password.dirty || userForm.controls.password.touched)
+          }">
+
+        <div class="invalid-feedback"
+             *ngIf="userForm.controls.password.errors && (userForm.controls.password.dirty || userForm.controls.password.touched)">
+          <p *ngIf="userForm.controls.password.errors.required">Password is required</p>
+          <p *ngIf="userForm.controls.password.errors.minlength">Password must be 8 characters long, we need another {{userForm.controls.password.errors.minlength.requiredLength - userForm.controls.password.errors.minlength.actualLength}} characters </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input name="confirmPassword" formControlName="confirmPassword" type="password" required
+               class="form-control" id="confirmPassword" placeholder="confirm password"
+               [ngClass]="{'is-invalid': userForm.controls.confirmPassword.invalid && (userForm.controls.confirmPassword.dirty || userForm.controls.confirmPassword.touched),
+          'is-valid': userForm.controls.confirmPassword.valid && (userForm.controls.confirmPassword.dirty || userForm.controls.confirmPassword.touched)
+          }">
+
+        <div class="invalid-feedback"
+             *ngIf="userForm.controls.password.errors && (userForm.controls.password.dirty || userForm.controls.password.touched)">
+          <p *ngIf="userForm.controls.password.errors.required">Password is required</p>
+          <p *ngIf="userForm.controls.password.errors.minlength">Password must be 8 characters long, we need another {{userForm.controls.password.errors.minlength.requiredLength - userForm.controls.password.errors.minlength.actualLength}} characters </p>
+          <p *ngIf="userForm.controls.password.errors['compare']">Passwords do not match</p>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Submit</button>
+      <button type="submit" class="btn btn-success" [disabled]="userForm.invalid">Cancel</button>
+    </form>
+    <p>
+      <span>Already have an account?&nbsp;</span>
+      <a [routerLink]="['/login']">Log in!</a>
+    </p>
+  </div>
+</div>
+
+<pre>
+  {{userForm.value|json}}
+</pre>
